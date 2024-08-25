@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharCount</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<style>
+    body{
+        background: rgb(63,94,251);
+        background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+        display: grid;
+
+    }
+    .head{
+        border: black;
+        width:400px;
+        height:300px;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 10%;  
+        background: rgb(238,174,202);
+        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    }
+    .warning {
+        color: red;
+        font-size: 0.8em;
+        margin-top: 5px;
+        display: none;
+    }
+</style>
+
+
+
+<body>
+    <div class="head">
+        <h2 class="text-center text-xl p-4" class="textbox">Mesaage Box</h2>
+        <div class="flex justify-center"><textarea id="message" placeholder="Type a messages..." class="w-72 h-36 mx-20"></textarea></div>
+        <div id="counter"class="mx-20" >
+            <span id="charCount" >0</span>/200 characters
+        <div id="warning" class="warning"></div>    
+        </div>   
+    </div>
+
+</body>
+</html>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const warning = document.getElementById('warning');
+    
+        const maxChars = 200;
+    
+        messageInput.addEventListener('input', () => {
+            const currentLength = messageInput.value.length;
+            charCount.textContent = currentLength;
+    
+            if (currentLength > maxChars) {
+                warning.textContent = 'You have exceeded the character limit!!!';
+                warning.style.display = 'block';
+                messageInput.value = messageInput.value.substring(0, maxChars);
+                charCount.textContent = maxChars;
+            } else {
+                warning.style.display = 'none';
+            }
+        });
+    });
+</script>
